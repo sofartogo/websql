@@ -1,0 +1,21 @@
+{
+	"server" : {
+		"host"     : "0.0.0.0",
+		"ports"    : "8087, 8088",
+		"username" : "root",
+		"password" : "root"
+//		"datadir"  : "",
+//		"pidfile"  : ""
+	},
+	"db" : {
+		"host"   : "localhost",
+		"port"   : "3306",
+		"dbname" : "default",
+		"engine" : "innodb",
+		"encode" : "utf-8"
+	}
+	"log" : {
+		"level"  : "DEBUG",
+		"stream" : "logs/websql.log"
+	}
+}
