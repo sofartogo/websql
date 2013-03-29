@@ -4,8 +4,8 @@
 		"ports"    : "8087, 8088",
 		"username" : "root",
 		"password" : "root"
-//		"datadir"  : "",
-//		"pidfile"  : ""
+		//"datadir"  : "",
+		"pidfile"  : "/tmp/websql/websql.pid"
 	},
 	"db" : {
 		"host"   : "localhost",

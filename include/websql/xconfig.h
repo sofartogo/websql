@@ -34,6 +34,7 @@ struct websql_server_config_s_ {
 	char *ports;
 	char *username;
 	char *password;
+	char *pidfile;
 };
 
 struct websql_db_config_s_ {
@@ -51,3 +52,5 @@ struct websql_log_config_s_ {
 
 websql_config_t *websql_config_init(const char *conf_file);
 void websql_config_fini(websql_config_t *config);
+
+#endif

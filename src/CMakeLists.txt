@@ -11,6 +11,7 @@ SET(WEBSQL_SRC
     rbtree.c
     splaytree.c
     websql.c
+	xconfig.c
     )
 
 ADD_EXECUTABLE(websql ${WEBSQL_SRC})

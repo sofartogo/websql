@@ -17,6 +17,7 @@
  */
 #include <assert.h>
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "cJSON.h"
@@ -31,7 +32,7 @@ _xconfig_json_content(const char *conf_file)
 	FILE *fp = NULL;
 	char *json_buf = NULL;
 
-	fp = fopen(filename, "r");
+	fp = fopen(conf_file, "r");
 	if (fp == NULL) {
 		LOG_ERROR(("failed to open conf file : %s", conf_file));
 		return NULL;
@@ -61,12 +62,12 @@ _xconfig_json_content(const char *conf_file)
 		return NULL;
 	}
 
-	flose(fp);
+	fclose(fp);
 	return json_buf;
 }
 
 static websql_config_t *
-_xconfig_all(const char *config);
+_xconfig_all(const char *config)
 {
 	assert(config != NULL);
 
@@ -156,6 +157,15 @@ _xconfig_all(const char *config);
 	strncpy(server_config->password, iter->valuestring, config_vlen);
 	config_vlen = -1;
 
+	iter = cJSON_GetObjectItem(server, "pidfile");
+	config_vlen = strlen(iter->valuestring);
+	server_config->pidfile = 
+		(char *)malloc(sizeof(char) * (config_vlen + 1));
+	memset(server_config->pidfile, 0, (config_vlen + 1));
+	strncpy(server_config->pidfile, iter->valuestring, config_vlen);
+	config_vlen = -1;
+
+
 	//db config
 	db = cJSON_GetObjectItem(root, "db");
 
@@ -232,7 +242,7 @@ websql_config_init(const char *conf_file)
 	assert(file != NULL);
 
 	websql_config_t *websql_config = NULL;
-	char *config_json = _xconfig_json_content(file);
+	char *config_json = _xconfig_json_content(conf_file);
 	websql_config = _xconfig_all(config_json);
 	free(config_json);
 	return websql_config;
@@ -272,6 +282,33 @@ void websql_config_fini(websql_config_t *config)
 			free(config->db_config->port);
 			config->db_config->port = NULL;
 		}
-		if (con)
+		if (config->db_config->dbname != NULL) {
+			free(config->db_config->dbname);
+			config->db_config->dbname = NULL;
+		}
+		if (config->db_config->engine != NULL) {
+			free(config->db_config->engine);
+			config->db_config->engine = NULL;
+		}
+		if (config->db_config->encode != NULL) {
+			free(config->db_config->encode);
+			config->db_config->encode = NULL;
+		}
+		free(config->db_config);
+		config->db_config = NULL;
 	}
+	if (config->log_config != NULL) {
+		if (config->log_config->level != NULL) {
+			free(config->log_config->level);
+			config->log_config->level = NULL;
+		}
+		if (config->log_config->stream != NULL) {
+			free(config->log_config->stream);
+			config->log_config->stream = NULL;
+		}
+		free(config->log_config);
+		config->log_config = NULL;
+	}
+	free(config);
+	config = NULL;
 }
