@@ -3,18 +3,18 @@
  *
  *       Filename:  cJSON.h
  *
- *    Description:  simple json parser based on cJSON, for convenience I
- *                  added more parser APIs to the original cJSON release,
- *                  and prettified the source code, thanks to Dave Gamble.
+ *    Description:  
  *
- *        Created:  12/12/2012 10:30:20 PM
+ *        Version:  1.0
+ *        Created:  04/02/2013 10:58:21 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 /*
   Copyright (c) 2009 Dave Gamble
  
@@ -37,8 +37,8 @@
   THE SOFTWARE.
 */
 
-#ifndef cJSON__h
-#define cJSON__h
+#ifndef cJSON_H_
+#define cJSON_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -187,3 +187,4 @@ extern void cJSON_ReplaceItemInObject(cJSON * object, const char *string,
 #endif
 
 #endif
+

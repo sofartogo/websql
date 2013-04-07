@@ -1,18 +1,18 @@
 {
 	"server" : {
-		"host"     : "0.0.0.0",
-		"ports"    : "8087, 8088",
+		"host"     : "localhost",
+		"port"    : "3306",
 		"username" : "root",
-		"password" : "root"
+		"password" : "ww19881116"
 		//"datadir"  : "",
 		"pidfile"  : "/tmp/websql/websql.pid"
 	},
 	"db" : {
 		"host"   : "localhost",
 		"port"   : "3306",
-		"dbname" : "default",
-		"engine" : "innodb",
-		"encode" : "utf-8"
+		"username" : "default",
+		"password" : "innodb",
+		"encode" : "utf8"
 	}
 	"log" : {
 		"level"  : "DEBUG",

@@ -3,17 +3,18 @@
  *
  *       Filename:  rbtree.c
  *
- *    Description:  rbtree(Red-Black tree) implementation adapted from linux
- *                  kernel thus can be used in userspace c program.
+ *    Description:  
  *
- *        Created:  09/02/2012 11:38:12 PM
+ *        Version:  0.0.1
+ *        Created:  04/02/2013 11:06:05 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 /*
   Red Black Trees
   (C) 1999  Andrea Arcangeli <andrea@suse.de>
@@ -465,3 +466,4 @@ void rb_replace_node(struct rb_node *victim, struct rb_node *new,
     /* Copy the pointers/colour from the victim to the replacement */
     *new = *victim;
 }
+

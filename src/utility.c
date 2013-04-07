@@ -1,19 +1,20 @@
-
 /*
  * =============================================================================
  *
  *       Filename:  utility.c
  *
- *    Description:  utility routines.
+ *    Description:  
  *
- *        Created:  12/16/2012 11:58:51 AM
+ *        Version:  0.0.1
+ *        Created:  04/02/2013 11:08:15 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 #include <stdio.h>
 #include <assert.h>
 #include <ctype.h>
@@ -144,3 +145,4 @@ gmttime_now()
 	strftime(time_val, 64, "%a, %d %b %Y %H:%M:%S GMT", gmt);
 	return time_val;
 }
+

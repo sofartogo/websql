@@ -3,15 +3,18 @@
  *
  *       Filename:  log.h
  *
- *    Description:  log utility.
+ *    Description:  
  *
- *        Created:  10/20/2012 10:06:52 PM
+ *        Version:  1.0
+ *        Created:  04/02/2013 11:00:05 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 #ifndef _WEBSQL_LOG_H_
 #define _WEBSQL_LOG_H_
 
@@ -72,4 +75,5 @@ extern void websql_log_free(websql_log_t *log);
 #endif
 
 #endif /* _websql_LOG_H_ */
+
 

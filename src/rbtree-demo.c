@@ -1,18 +1,20 @@
 /*
  * =============================================================================
  *
- *       Filename:  rbtree-tst.c
+ *       Filename:  rbtree-demo.c
  *
- *    Description:  rbtree testcase.
+ *    Description:  
  *
- *        Created:  09/02/2012 11:39:34 PM
+ *        Version:  0.0.1
+ *        Created:  04/02/2013 11:06:41 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 #include "rbtree.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -136,5 +138,6 @@ int main()
         printf("key = %s\n", rb_entry(node, struct mynode, node)->string);
     return 0;
 }
+
 
 

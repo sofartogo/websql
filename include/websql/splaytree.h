@@ -3,11 +3,14 @@
  *
  *       Filename:  splaytree.h
  *
- *    Description:  simple splay tree implementation.
+ *    Description:  
  *
- *        Created:  12/12/2012 10:12:33 AM
+ *        Version:  1.0
+ *        Created:  04/02/2013 11:02:45 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
@@ -38,3 +41,4 @@ splaytree_t * splaytree_size(splaytree_t *t);
 /* a special version of NULL which was a real node with size 0.  */
 
 #endif
+

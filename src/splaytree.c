@@ -3,16 +3,18 @@
  *
  *       Filename:  splaytree.c
  *
- *    Description:  simple splay tree implementation.
+ *    Description:  
  *
- *        Created:  12/12/2012 10:12:46 AM
+ *        Version:  0.0.1
+ *        Created:  04/02/2013 11:07:36 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
- *         Author:  Fu Haiping (forhappy), haipingf@gmail.com
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 /*
            An implementation of top-down splaying with sizes
              D. Sleator <sleator@cs.cmu.edu>, January 1994.
@@ -224,3 +226,4 @@ static splaytree_t *splaytree_find_rank(int r, splaytree_t *t) {
     }
 }
 #endif
+

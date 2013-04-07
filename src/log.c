@@ -3,15 +3,18 @@
  *
  *       Filename:  log.c
  *
- *    Description:  log utility.
+ *    Description:  
  *
- *        Created:  10/20/2012 10:06:58 PM
+ *        Version:  0.0.1
+ *        Created:  04/02/2013 11:05:08 AM
+ *       Revision:  r1
+ *       Compiler:  gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5
  *
+ *         Author:  Wang Wei (sofartogo), wangwei881116@gmail.com
  *        Company:  ICT ( Institute Of Computing Technology, CAS )
  *
  * =============================================================================
  */
-
 #include <assert.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -236,3 +239,4 @@ int main(int argc, const char *argv[])
 }
 
 #endif
+

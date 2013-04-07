@@ -133,12 +133,12 @@ _xconfig_all(const char *config)
 	strncpy(server_config->host, iter->valuestring, config_vlen);
 	config_vlen = -1;
 
-	iter = cJSON_GetObjectItem(server, "ports");
+	iter = cJSON_GetObjectItem(server, "port");
 	config_vlen = strlen(iter->valuestring);
-	server_config->ports = 
+	server_config->port = 
 		(char *)malloc(sizeof(char) * (config_vlen + 1));
-	memset(server_config->ports, 0, (config_vlen + 1));
-	strncpy(server_config->ports, iter->valuestring, config_vlen);
+	memset(server_config->port, 0, (config_vlen + 1));
+	strncpy(server_config->port, iter->valuestring, config_vlen);
 	config_vlen = -1;
 
 	iter = cJSON_GetObjectItem(server, "username");
@@ -185,20 +185,20 @@ _xconfig_all(const char *config)
 	strncpy(db_config->port, iter->valuestring, config_vlen);
 	config_vlen = -1;
 
-	iter = cJSON_GetObjectItem(db, "dbname");
+	iter = cJSON_GetObjectItem(db, "username");
 	config_vlen = strlen(iter->valuestring);
-	db_config->dbname = 
+	db_config->username = 
 		(char *)malloc(sizeof(char) * (config_vlen + 1));
-	memset(db_config->dbname, 0, (config_vlen + 1));
-	strncpy(db_config->dbname, iter->valuestring, config_vlen);
+	memset(db_config->username, 0, (config_vlen + 1));
+	strncpy(db_config->username, iter->valuestring, config_vlen);
 	config_vlen = -1;
 	
-	iter = cJSON_GetObjectItem(db, "engine");
+	iter = cJSON_GetObjectItem(db, "password");
 	config_vlen = strlen(iter->valuestring);
-	db_config->engine = 
+	db_config->password = 
 		(char *)malloc(sizeof(char) * (config_vlen + 1));
-	memset(db_config->engine, 0, (config_vlen + 1));
-	strncpy(db_config->engine, iter->valuestring, config_vlen);
+	memset(db_config->password, 0, (config_vlen + 1));
+	strncpy(db_config->password, iter->valuestring, config_vlen);
 	config_vlen = -1;
 
 	iter = cJSON_GetObjectItem(db, "encode");

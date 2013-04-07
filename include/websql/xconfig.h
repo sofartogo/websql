@@ -31,7 +31,7 @@ struct websql_config_s_ {
 
 struct websql_server_config_s_ {
 	char *host;
-	char *ports;
+	char *port;
 	char *username;
 	char *password;
 	char *pidfile;
@@ -40,8 +40,8 @@ struct websql_server_config_s_ {
 struct websql_db_config_s_ {
 	char *host;
 	char *port;
-	char *dbname;
-	char *engine;
+	char *username;
+	char *password;
 	char *encode;
 };
 
