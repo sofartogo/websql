@@ -8,8 +8,10 @@ SET(WEBSQL_SRC
     uuid/uuid.c
     cJSON.c
     log.c
-    rbtree.c
-    splaytree.c
+	#rbtree.c
+	#splaytree.c
+	rpc.c
+	utility.c
     websql.c
 	xconfig.c
     )
@@ -18,4 +20,4 @@ ADD_EXECUTABLE(websql ${WEBSQL_SRC})
 
 # LINK_DIRECTORIES(${WEBSQL_EXTERNAL_LIBS})
 
-TARGET_LINK_LIBRARIES(websql ${WEBSQL_EXTERNAL_LIBS} pthread m)
+TARGET_LINK_LIBRARIES(websql ${WEBSQL_EXTERNAL_LIBS} pthread m mysqlclient)

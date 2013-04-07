@@ -49,7 +49,7 @@
 #include <limits.h>
 #include <ctype.h>
 
-#include "cJSON.h"
+#include <websql/cJSON.h>
 
 static const char *ep;
 

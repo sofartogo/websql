@@ -25,7 +25,7 @@
 #include <sys/time.h>
 #include <string.h>
 
-#include "log.h"
+#include <websql/log.h>
 
 #define TIME_NOW_BUFFER_SIZE 1024
 #define FORMAT_LOG_BUFFER_SIZE 4096

@@ -15,17 +15,17 @@
  *
  * =============================================================================
  */
-//#include <assert.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//
-//#include <websql/rpc.h>
-//
-//#include "log.h"
-//#include "cJSON.h"
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <websql/rpc.h>
+
+#include <websql/log.h>
+#include <websql/cJSON.h>
 //#include "tstring.h"
-//#include "server.h"
-//#include "utility.h"
+//#include <websql/xconfig.h>
+#include <websql/utility.h>
 //
 //static int
 //_rpc_parse_kv_pairs(evhttpx_kv_t *kv, void *arg)
@@ -185,87 +185,87 @@
 //    return response;
 //}
 //
-//static char *
-//_rpc_jsonfy_response_on_sanity_check(
-//        unsigned int code,
-//        const char *status,
-//        const char *message)
-//{
-//    assert(status != NULL);
-//    assert(message != NULL);
-//
-//    char *out = NULL;
-//    char *now = gmttime_now();
-//
-//    cJSON *root = cJSON_CreateObject();
-//
-//    cJSON_AddNumberToObject(root, "code", code);
-//    cJSON_AddStringToObject(root, "status", status);
-//    cJSON_AddStringToObject(root, "message", message);
-//    cJSON_AddStringToObject(root, "date", now);
-//    // out = cJSON_Print(root);
-//    /* unformatted json has less data. */
-//    out = cJSON_PrintUnformatted(root);
-//
-//    free(now);
-//    cJSON_Delete(root);
-//    return out;
-//}
-//
-//static char *
-//_rpc_sanity_check(evhttpx_request_t *req, unsigned int *code)
-//{
-//    assert(req != NULL);
-//
-//    /* HTTP protocol used */
-//    evhttpx_proto proto = req->proto;
-//    if (proto != evhttpx_PROTO_11) {
-//        *code = 400;
-//        return _rpc_jsonfy_response_on_sanity_check(
-//                400,
-//                "Bad Request",
-//                "Protocal error, you may have to use HTTP/1.1 to do request.");
-//    }
-//    /* request method. */
-//    int method= evhttpx_request_get_method(req);
-//    if (method != http_method_GET) {
-//        *code = 405;
-//        return _rpc_jsonfy_response_on_sanity_check(
-//                405,
-//                "Method Not Allowed",
-//                "HTTP method error, you may have to use GET to do request.");
-//
-//    }
-//
-//    *code = 200;
-//    return NULL;
-//}
-//
-//static void 
-//URI_rpc_void_cb(evhttpx_request_t *req, void *userdata)
-//{
-//    /* json formatted response. */
-//    unsigned int code = 0;
-//    char *response = NULL;
-//
-//    response = _rpc_sanity_check(req, &code);
-//    if (response != NULL) {
-//        evbuffer_add_printf(req->buffer_out, "%s", response);
-//        evhttpx_send_reply(req, code);
-//        free(response);
-//        return;
-//    }
-//
-//    response = _rpc_jsonfy_response_on_sanity_check(
-//            200,
-//            "OK",
-//            "Reveldb RPC is healthy! :-)");
-//    evbuffer_add_printf(req->buffer_out, "%s", response);
-//    evhttpx_send_reply(req, EVHTTPX_RES_OK);
-//    free(response);
-//    return;
-//}
-//
+static char *
+_rpc_jsonfy_response_on_sanity_check(
+        unsigned int code,
+        const char *status,
+        const char *message)
+{
+    assert(status != NULL);
+    assert(message != NULL);
+
+    char *out = NULL;
+    char *now = gmttime_now();
+
+    cJSON *root = cJSON_CreateObject();
+
+    cJSON_AddNumberToObject(root, "code", code);
+    cJSON_AddStringToObject(root, "status", status);
+    cJSON_AddStringToObject(root, "message", message);
+    cJSON_AddStringToObject(root, "date", now);
+    // out = cJSON_Print(root);
+    /* unformatted json has less data. */
+    out = cJSON_PrintUnformatted(root);
+
+    free(now);
+    cJSON_Delete(root);
+    return out;
+}
+
+static char *
+_rpc_sanity_check(evhttpx_request_t *req, unsigned int *code)
+{
+    assert(req != NULL);
+
+    /* HTTP protocol used */
+    evhttpx_proto proto = req->proto;
+    if (proto != evhttpx_PROTO_11) {
+        *code = 400;
+        return _rpc_jsonfy_response_on_sanity_check(
+                400,
+                "Bad Request",
+                "Protocal error, you may have to use HTTP/1.1 to do request.");
+    }
+    /* request method. */
+    int method= evhttpx_request_get_method(req);
+    if (method != http_method_GET) {
+        *code = 405;
+        return _rpc_jsonfy_response_on_sanity_check(
+                405,
+                "Method Not Allowed",
+                "HTTP method error, you may have to use GET to do request.");
+
+    }
+
+    *code = 200;
+    return NULL;
+}
+
+static void 
+URI_rpc_void_cb(evhttpx_request_t *req, void *userdata)
+{
+    /* json formatted response. */
+    unsigned int code = 0;
+    char *response = NULL;
+
+    response = _rpc_sanity_check(req, &code);
+    if (response != NULL) {
+        evbuffer_add_printf(req->buffer_out, "%s", response);
+        evhttpx_send_reply(req, code);
+        free(response);
+        return;
+    }
+
+    response = _rpc_jsonfy_response_on_sanity_check(
+            200,
+            "OK",
+            "Reveldb RPC is healthy! :-)");
+    evbuffer_add_printf(req->buffer_out, "%s", response);
+    evhttpx_send_reply(req, EVHTTPX_RES_OK);
+    free(response);
+    return;
+}
+
 //static void
 //URI_rpc_echo_cb(evhttpx_request_t *req, void *userdata)
 //{
@@ -649,9 +649,9 @@ websql_rpc_init()
 
     rpc->evbase = event_base_new();
     rpc->httpx = evhttpx_new(rpc->evbase, NULL);
-//
-//    /* only for server status test. */
-//    callbacks->rpc_void_cb = evhttpx_set_cb(rpc->httpx, "/rpc/void", URI_rpc_void_cb, NULL);
+
+    /* only for server status test. */
+    callbacks->rpc_void_cb = evhttpx_set_cb(rpc->httpx, "/rpc/void", URI_rpc_void_cb, NULL);
 //    callbacks->rpc_echo_cb = evhttpx_set_cb(rpc->httpx, "/rpc/echo", URI_rpc_echo_cb, NULL);
 //    callbacks->rpc_head_cb = evhttpx_set_cb(rpc->httpx, "/rpc/head", URI_rpc_head_cb, NULL);
 //    
@@ -702,33 +702,35 @@ websql_rpc_init()
 //    callbacks->rpc_check_cb = evhttpx_set_cb(rpc->httpx, "/rpc/check", URI_rpc_check_cb, NULL);
 //    callbacks->rpc_exists_cb = evhttpx_set_cb(rpc->httpx, "/rpc/exists", URI_rpc_exists_cb, NULL);
 //    callbacks->rpc_version_cb = evhttpx_set_cb(rpc->httpx, "/rpc/version", URI_rpc_version_cb, NULL);
-//
-//    rpc->callbacks = callbacks;
-//
-//    return rpc;
-//
-//}
-//
-//void
-//websql_rpc_run(websql_rpc_t *rpc)
-//{
-//
-//    assert(rpc != NULL);
-//
-//    // evhttpx_bind_socket(rpc->httpx, "0.0.0.0", 8087, 1024);
-//    evhttpx_bind_socket(rpc->httpx, "0.0.0.0", 8088, 1024);
-//
-//    event_base_loop(rpc->evbase, 0);
-//}
-//
-//void
-//websql_rpc_stop(websql_rpc_t *rpc)
-//{
-//    assert(rpc != NULL);
-//
-//    evhttpx_unbind_socket(rpc->httpx);
-//
-//    evhttpx_callback_free(rpc->callbacks->rpc_void_cb);
+
+    rpc->callbacks = callbacks;
+
+    return rpc;
+
+}
+
+void
+websql_rpc_run(websql_rpc_t *rpc, websql_server_config_t *server_config)
+{
+
+    assert(rpc != NULL);
+	assert(server_config);
+
+    // evhttpx_bind_socket(rpc->httpx, "0.0.0.0", 8087, 1024);
+	int port = atoi(server_config->port);
+    evhttpx_bind_socket(rpc->httpx, server_config->host, port, 1024);
+
+    event_base_loop(rpc->evbase, 0);
+}
+
+void
+websql_rpc_stop(websql_rpc_t *rpc)
+{
+    assert(rpc != NULL);
+
+    evhttpx_unbind_socket(rpc->httpx);
+
+    evhttpx_callback_free(rpc->callbacks->rpc_void_cb);
 //    evhttpx_callback_free(rpc->callbacks->rpc_echo_cb);
 //    evhttpx_callback_free(rpc->callbacks->rpc_head_cb);
 //
@@ -771,9 +773,9 @@ websql_rpc_init()
 //    evhttpx_callback_free(rpc->callbacks->rpc_exists_cb);
 //    evhttpx_callback_free(rpc->callbacks->rpc_version_cb);
 //
-//    evhttpx_free(rpc->httpx);
-//    event_base_free(rpc->evbase);
-//    free(rpc->callbacks);
-//    free(rpc);
-//}
-//
+    evhttpx_free(rpc->httpx);
+    event_base_free(rpc->evbase);
+    free(rpc->callbacks);
+    free(rpc);
+}
+

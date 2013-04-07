@@ -20,9 +20,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "cJSON.h"
-#include "log.h"
-#include "xconfig.h"
+#include <websql/cJSON.h>
+#include <websql/log.h>
+#include <websql/xconfig.h>
 
 static char *
 _xconfig_json_content(const char *conf_file)
@@ -239,7 +239,7 @@ _xconfig_all(const char *config)
 websql_config_t *
 websql_config_init(const char *conf_file)
 {
-	assert(file != NULL);
+	assert(conf_file != NULL);
 
 	websql_config_t *websql_config = NULL;
 	char *config_json = _xconfig_json_content(conf_file);
@@ -257,9 +257,9 @@ void websql_config_fini(websql_config_t *config)
 			free(config->server_config->host);
 			config->server_config->host = NULL;
 		}
-		if (config->server_config->ports != NULL) {
-			free(config->server_config->ports);
-			config->server_config->ports = NULL;
+		if (config->server_config->port != NULL) {
+			free(config->server_config->port);
+			config->server_config->port = NULL;
 		}
 		if (config->server_config->username != NULL) {
 			free(config->server_config->username);
@@ -268,6 +268,10 @@ void websql_config_fini(websql_config_t *config)
 		if (config->server_config->password != NULL) {
 			free(config->server_config->password);
 			config->server_config->password = NULL;
+		}
+		if (config->server_config->pidfile!= NULL) {
+			free(config->server_config->pidfile);
+			config->server_config->pidfile = NULL;
 		}
 		free(config->server_config);
 		config->server_config = NULL;
@@ -282,13 +286,13 @@ void websql_config_fini(websql_config_t *config)
 			free(config->db_config->port);
 			config->db_config->port = NULL;
 		}
-		if (config->db_config->dbname != NULL) {
-			free(config->db_config->dbname);
-			config->db_config->dbname = NULL;
+		if (config->db_config->username != NULL) {
+			free(config->db_config->username);
+			config->db_config->username = NULL;
 		}
-		if (config->db_config->engine != NULL) {
-			free(config->db_config->engine);
-			config->db_config->engine = NULL;
+		if (config->db_config->password != NULL) {
+			free(config->db_config->password);
+			config->db_config->password = NULL;
 		}
 		if (config->db_config->encode != NULL) {
 			free(config->db_config->encode);

@@ -63,7 +63,7 @@
        Addison-Wesley, 1993, pp 367-375
 */
 
-#include "splaytree.h"
+#include <websql/splaytree.h>
 #include <stdlib.h>
 #include <assert.h>
 

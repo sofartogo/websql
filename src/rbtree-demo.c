@@ -15,7 +15,7 @@
  *
  * =============================================================================
  */
-#include "rbtree.h"
+#include <websql/rbtree.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -19,6 +19,7 @@
 #define _WEBSQL_RPC_H_
 
 #include <websql/evhttpx/evhttpx.h>
+#include <websql/xconfig.h>
 
 #define WEBSQL_RPC_MAX_PORTS_LISTENING_ON 32
 
@@ -26,8 +27,8 @@ typedef struct websql_rpc_callbacks_s_ websql_rpc_callbacks_t;
 typedef struct websql_rpc_s_ websql_rpc_t;
 
 struct websql_rpc_callbacks_s_ {
-    ///* only for server status test. */
-    //evhttpx_callback_t  *rpc_void_cb;
+    /* only for server status test. */
+    evhttpx_callback_t  *rpc_void_cb;
     //evhttpx_callback_t  *rpc_echo_cb;
     //evhttpx_callback_t  *rpc_head_cb;
 
@@ -93,7 +94,7 @@ struct websql_rpc_s_ {
 
 extern websql_rpc_t * websql_rpc_init();
 
-extern void websql_rpc_run(websql_rpc_t *rpc);
+extern void websql_rpc_run(websql_rpc_t *rpc, websql_server_config_t *server_config);
 
 extern void websql_rpc_stop(websql_rpc_t *rpc);
 
