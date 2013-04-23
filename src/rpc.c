@@ -266,6 +266,10 @@ URI_rpc_void_cb(evhttpx_request_t *req, void *userdata)
     return;
 }
 
+static void URI_rpc_apply_for_cb(evhttpx_request_t *req, void *userdata)
+{
+	
+}
 //static void
 //URI_rpc_echo_cb(evhttpx_request_t *req, void *userdata)
 //{
@@ -654,8 +658,11 @@ websql_rpc_init()
     callbacks->rpc_void_cb = evhttpx_set_cb(rpc->httpx, "/rpc/void", URI_rpc_void_cb, NULL);
 //    callbacks->rpc_echo_cb = evhttpx_set_cb(rpc->httpx, "/rpc/echo", URI_rpc_echo_cb, NULL);
 //    callbacks->rpc_head_cb = evhttpx_set_cb(rpc->httpx, "/rpc/head", URI_rpc_head_cb, NULL);
-//    
-//    /* websql reports and internal leveldb storage engine status. */
+	
+	/* apply for websql access id and access key */
+	callbacks->rpc_apply_for_cb = evhttpx_set_cb(rpc->httpx, "/rpc/applyfor", URI_rpc_apply_for_cb, NULL);
+
+    /* websql reports and internal leveldb storage engine status. */
 //    callbacks->rpc_report_cb = evhttpx_set_cb(rpc->httpx, "/rpc/report", URI_rpc_report_cb, NULL);
 //    callbacks->rpc_status_cb = evhttpx_set_cb(rpc->httpx, "/rpc/status", URI_rpc_status_cb, NULL);
 //    callbacks->rpc_property_cb = evhttpx_set_cb(rpc->httpx, "/rpc/property", URI_rpc_property_cb, NULL);

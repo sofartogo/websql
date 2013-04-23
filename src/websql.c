@@ -118,6 +118,7 @@ int main(int argc, const char *argv[])
 	websql_rpc_stop(rpc);
     
 	_server_remove_pidfile(websql_config->server_config->pidfile);
+
     websql_log_free(websql_log);
     websql_config_fini(websql_config);
 
